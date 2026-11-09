@@ -1,815 +1,499 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<meta name="theme-color" content="#350713">  
+<title>Simran & Nitesh | Wedding Invitation</title>  <style>  
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Great+Vibes&family=Montserrat:wght@300;400&display=swap');  
+  
+:root{  
+  --wine:#350713;  
+  --wine2:#64192e;  
+  --gold:#d8b36b;  
+  --pale:#f7e4b8;  
+  --cream:#fff5e6;  
+}  
+*{box-sizing:border-box}  
+html{scroll-behavior:smooth}  
+body{  
+  margin:0;background:var(--wine);color:var(--cream);  
+  font-family:'Cormorant Garamond',serif;overflow-x:hidden  
+}  
+a{color:inherit}  
+button{font:inherit;cursor:pointer}  
+.script{font-family:'Great Vibes',cursive}  
+.gold{color:var(--gold)}  
+.kicker{  
+  font:10px 'Montserrat',sans-serif;letter-spacing:3px;  
+  text-transform:uppercase;color:var(--gold)  
+}  
+.btn{  
+  display:inline-block;padding:14px 22px;  
+  border:1px solid var(--gold);background:var(--gold);  
+  color:var(--wine);text-decoration:none;  
+  font:10px 'Montserrat',sans-serif;letter-spacing:1.5px;  
+  text-transform:uppercase;transition:.3s  
+}  
+.btn:hover{background:transparent;color:var(--gold)}  
+section{padding:80px 20px;text-align:center;position:relative}  
+.heading{  
+  font-size:clamp(38px,8vw,62px);font-weight:300;  
+  line-height:1.1;margin:16px 0 25px  
+}  
+.copy{max-width:620px;margin:auto;font-size:19px;line-height:1.8}  
+.rule{height:1px;width:90px;background:var(--gold);margin:25px auto}  
+  
+/* Falling gold decorations */  
+#petals{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:15}  
+.petal{  
+  position:absolute;top:-30px;color:var(--gold);  
+  animation:fall linear forwards;opacity:.8  
+}  
+@keyframes fall{  
+  to{transform:translateY(110vh) rotate(600deg);opacity:0}  
+}  
+@keyframes glow{  
+  from{text-shadow:0 0 4px #d8b36b44}  
+  to{text-shadow:0 0 20px #f7e4b8}  
+}  
+@keyframes rise{  
+  from{opacity:0;transform:translateY(25px)}  
+  to{opacity:1;transform:translateY(0)}  
+}  
+  
+/* Opening envelope */  
+#envelope{  
+  position:fixed;inset:0;z-index:100;  
+  background:radial-gradient(ellipse,#6c2036,#25030c);  
+  display:grid;place-items:center;padding:24px;  
+  transition:opacity 1s,visibility 1s  
+}  
+#envelope.closed{opacity:0;visibility:hidden;pointer-events:none}  
+.env-inner{width:min(100%,410px);text-align:center}  
+.env-title{  
+  font:10px 'Montserrat',sans-serif;letter-spacing:4px;  
+  color:var(--gold);margin-bottom:25px  
+}  
+.envelope{  
+  height:245px;position:relative;perspective:1000px;  
+  background:#681c30;border:1px solid var(--gold);  
+  box-shadow:0 20px 60px #0007  
+}  
+.env-letter{  
+  position:absolute;top:5%;left:8%;width:84%;height:90%;  
+  background:linear-gradient(140deg,#fff4dd,#e5c990);  
+  color:var(--wine);display:grid;place-items:center;  
+  transition:transform 1s .3s;z-index:1  
+}  
+.env-flap{  
+  position:absolute;inset:0;  
+  background:linear-gradient(140deg,#a74a60,#6a1b30);  
+  clip-path:polygon(0 0,100% 0,50% 65%);  
+  transform-origin:top;transition:transform 1s;z-index:3  
+}  
+.env-front{  
+  position:absolute;inset:0;z-index:2;  
+  background:linear-gradient(32deg,transparent 49.5%,#9d4a59 50%,transparent 50.5%),  
+  linear-gradient(-32deg,transparent 49.5%,#6a1a2d 50%,transparent 50.5%);  
+  pointer-events:none  
+}  
+.seal{  
+  position:absolute;z-index:4;left:50%;top:55%;  
+  transform:translate(-50%,-50%);  
+  width:54px;height:54px;border-radius:50%;  
+  display:grid;place-items:center;background:var(--gold);  
+  color:var(--wine);border:2px solid #8e632a;transition:.3s  
+}  
+#envelope.open .env-flap{transform:rotateX(180deg)}  
+#envelope.open .env-letter{transform:translateY(-90px) scale(1.03)}  
+#envelope.open .seal{opacity:0}  
+.open-btn{margin-top:32px}  
+  
+/* Royal main invitation */  
+.hero{  
+  min-height:100svh;display:flex;align-items:center;  
+  justify-content:center;padding:45px 18px;  
+  background:radial-gradient(ellipse at 50% 35%,#7c2a40,#4a0d20 50%,#20030a);  
+  overflow:hidden  
+}  
+.hero-frame{  
+  width:min(100%,620px);padding:45px 18px 35px;  
+  border:1px solid var(--gold);outline:1px solid #96713b;  
+  outline-offset:7px;text-align:center;position:relative  
+}  
+.hero-frame:before,.hero-frame:after{  
+  position:absolute;color:var(--gold);font-size:22px;content:"✧"  
+}  
+.hero-frame:before{top:10px;left:12px}  
+.hero-frame:after{bottom:10px;right:12px}  
+.hero h1{  
+  font-size:clamp(65px,14vw,100px);font-weight:400;  
+  line-height:.85;color:var(--pale);margin:28px 0  
+}  
+.hero h1 span{  
+  display:block;font-family:'Great Vibes',cursive;  
+  font-size:.5em;line-height:1.3;color:var(--cream)  
+}  
+.hero-date{font-size:24px;color:var(--pale);letter-spacing:2px}  
+.hero-ornament{  
+  color:var(--gold);font-size:23px;letter-spacing:8px;  
+  animation:glow 2.5s ease-in-out infinite alternate  
+}  
+.hero-sub{  
+  font:10px 'Montserrat',sans-serif;  
+  letter-spacing:3px;text-transform:uppercase  
+}  
+.hero .btn{margin-top:15px}  
+  
+/* Stylized animated bride and groom */  
+.couple-stage{  
+  position:relative;width:min(100%,440px);height:260px;  
+  margin:25px auto 5px;display:flex;align-items:flex-end;  
+  justify-content:center;overflow:hidden  
+}  
+.couple-stage:before{  
+  content:"";position:absolute;bottom:0;width:220px;height:220px;  
+  border:1px solid var(--gold);border-radius:50% 50% 0 0;  
+  border-bottom:0;background:radial-gradient(ellipse,#d8b36b25,transparent 70%)  
+}  
+.couple-stage:after{  
+  content:"✦ ❋ ✧ ❦ ✧ ❋ ✦";position:absolute;top:15px;  
+  color:var(--gold);letter-spacing:6px;animation:glow 2s infinite alternate  
+}  
+.person{  
+  position:relative;width:145px;height:215px;opacity:0;  
+  animation:coupleIn 1.5s ease-out forwards  
+}  
+.person.bride{z-index:2;margin-right:-15px}  
+.person.groom{margin-left:-15px;animation-delay:.5s}  
+.head{  
+  position:absolute;top:22px;left:52px;width:43px;height:47px;  
+  border-radius:48%;background:linear-gradient(90deg,#8b5038,#d7a17c,#895039)  
+}  
+.hair{  
+  position:absolute;top:12px;left:47px;width:53px;height:49px;  
+  border-radius:50% 50% 20% 20%;background:#211018  
+}  
+.bride .hair{height:55px}  
+.person-body{  
+  position:absolute;top:63px;left:18px;width:108px;height:152px;  
+  clip-path:polygon(35% 0,65% 0,80% 25%,100% 100%,0 100%,20% 25%)  
+}  
+.bride .person-body{background:linear-gradient(90deg,#410817,#8e263e,#500b20)}  
+.groom .person-body{  
+  background:linear-gradient(90deg,#21040b,#591629,#26040c);  
+  clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)  
+}  
+.bride .person-body:after{  
+  content:"✦ ✧ ✦";position:absolute;top:30px;left:17px;  
+  color:var(--gold);line-height:2.2  
+}  
+.groom .person-body:after{  
+  content:"";position:absolute;top:0;left:49%;  
+  width:2px;height:100%;background:var(--gold)  
+}  
+.bride .head:after{  
+  content:"✦";position:absolute;top:-15px;left:11px;  
+  color:var(--gold);font-size:17px  
+}  
+@keyframes coupleIn{  
+  from{opacity:0;transform:translateY(35px) scale(.85);filter:blur(6px)}  
+  to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}  
+}  
+.couple-caption{animation:rise 1.3s 1s both}  
+  
+/* Introduction */  
+#intro{background:var(--cream);color:var(--wine)}  
+#intro .heading{color:var(--wine)}  
+.monogram{  
+  width:105px;height:105px;border:1px solid #b58a45;  
+  border-radius:50%;outline:1px solid #d8bd84;outline-offset:5px;  
+  margin:25px auto;display:grid;place-items:center;  
+  font-size:34px;color:#9b6c2c  
+}  
+  
+/* Live countdown */  
+#countdown{background:linear-gradient(145deg,#4b1022,#23040b)}  
+.count-grid{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:30px auto}  
+.count-box{width:100px;border:1px solid #9e783f;padding:16px 8px}  
+.count-box strong{display:block;font-size:40px;font-weight:300;color:var(--pale)}  
+.count-box span{font:9px 'Montserrat',sans-serif;letter-spacing:2px;color:var(--gold)}  
+  
+/* Story and photos */  
+#story{background:#f5ead9;color:var(--wine)}  
+#story .heading{color:var(--wine)}  
+.story-grid{  
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;  
+  gap:25px;max-width:900px;margin:35px auto 0;text-align:left  
+}  
+.story-photo{  
+  display:block;width:100%;aspect-ratio:4/5;object-fit:cover;  
+  border:6px solid white;outline:1px solid #c6a36a;outline-offset:-12px  
+}  
+.story-text h3{font-size:36px;font-weight:400;margin:15px 0}  
+.story-text p{font-size:18px;line-height:1.8}  
+#gallery{background:#300610}  
+.gallery-grid{  
+  max-width:950px;margin:35px auto 0;  
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px  
+}  
+.gallery-grid img{  
+  display:block;width:100%;aspect-ratio:3/4;object-fit:cover;  
+  border:1px solid #98713a;transition:transform .4s  
+}  
+.gallery-grid img:hover{transform:scale(1.025)}  
+.placeholder{  
+  aspect-ratio:3/4;background:linear-gradient(140deg,#702b40,#29050e);  
+  display:grid;place-items:center;color:var(--gold);  
+  font-size:40px;border:1px solid #98713a  
+}  
+  
+/* Events */  
+#events{background:var(--cream);color:var(--wine)}  
+#events .heading{color:var(--wine)}  
+.event-grid{  
+  display:grid;grid-template-columns:repeat(3,1fr);  
+  gap:16px;max-width:950px;margin:35px auto 0  
+}  
+.event{  
+  border:1px solid #c3a165;padding:28px 15px;  
+  background:linear-gradient(145deg,#fffaf2,#f0dfc5)  
+}  
+.event .symbol{font-size:32px;color:#9a6b2e}  
+.event h3{font-size:27px;font-weight:400;margin:13px 0}  
+.event p{font-size:17px;line-height:1.7}  
+  
+/* Venue and closing */  
+#venue{background:radial-gradient(ellipse at center,#6b2035,#28040d)}  
+.address{font-size:21px;line-height:1.8}  
+#closing{background:var(--cream);color:var(--wine)}  
+#closing .heading{color:var(--wine)}  
+#closing .script{font-size:clamp(48px,10vw,78px);color:#8e5b24}  
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s,transform .8s}  
+.reveal.visible{opacity:1;transform:translateY(0)}  
+footer{  
+  text-align:center;padding:30px 15px;  
+  font:9px 'Montserrat',sans-serif;letter-spacing:2px;  
+  line-height:2;color:var(--gold)  
+}  
+@media(max-width:650px){  
+  section{padding:70px 17px}  
+  .story-grid{grid-template-columns:1fr;max-width:430px}  
+  .story-photo{max-height:440px}  
+  .event-grid{grid-template-columns:1fr;max-width:430px}  
+  .gallery-grid{grid-template-columns:repeat(2,1fr);gap:8px}  
+  .gallery-grid img:last-child{grid-column:span 2;aspect-ratio:4/3}  
+  .count-box{width:calc(50% - 8px);max-width:130px}  
+  .address{font-size:18px}  
+}  
+@media(prefers-reduced-motion:reduce){  
+  *,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}  
+  .reveal,.person,.couple-caption{opacity:1;transform:none;filter:none}  
+}  
+</style>  </head>  <body>  
+<div id="petals"></div>  <!-- ENVELOPE OPENING -->  <div id="envelope">  
+  <div class="env-inner">  
+    <p class="env-title">A PERSONAL INVITATION</p>  
+    <div class="envelope" id="envBox">  
+      <div class="env-letter">  
+        <div>  
+          <p style="font:10px Montserrat,sans-serif;letter-spacing:2px">YOU ARE INVITED</p>  
+          <p class="script" style="font-size:42px;margin:8px">S & N</p>  
+          <p style="font-size:12px">WITH LOVE</p>  
+        </div>  
+      </div>  
+      <div class="env-flap"></div>  
+      <div class="env-front"></div>  
+      <div class="seal">S<span style="font-size:12px">&</span>N</div>  
+    </div>  
+    <p class="script gold" style="font-size:34px">A beautiful beginning awaits</p>  
+    <button class="btn open-btn" id="openInvite">Open Your Invitation ✦</button>  
+  </div>  
+</div>  <header class="hero" id="home">  
+  <div class="hero-frame">  
+    <div class="hero-ornament">❦ ✧ ❦</div>  
+    <p class="kicker">Together with our families</p>  
+    <p style="font-size:19px">We joyfully invite you to celebrate</p>  
+    <h1>Simran<span>and</span>Nitesh</h1>  
+    <div class="hero-ornament">✧ ❋ ✧</div>  
+    <p class="hero-sub">Two hearts · One forever</p>  
+    <p class="hero-date">25 November 2026</p>  
+    <p class="hero-sub">Belgaum · Karnataka</p>  <div class="couple-stage" aria-label="Stylized bride and groom">  
+  <div class="person bride">  
+    <div class="hair"></div><div class="head"></div>  
+    <div class="person-body"></div>  
+  </div>  
+  <div class="person groom">  
+    <div class="hair"></div><div class="head"></div>  
+    <div class="person-body"></div>  
+  </div>  
+</div>  
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#350713">
-<title>Simran & Nitesh | Wedding Invitation</title>
+<div class="couple-caption">  
+  <p class="script gold" style="font-size:35px;margin:8px">Two hearts, one forever</p>  
+</div>  
+<a class="btn" href="#intro">Discover Our Celebration ↓</a>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Great+Vibes&family=Montserrat:wght@300;400&display=swap');
-
-:root{
-  --wine:#350713;
-  --wine2:#64192e;
-  --gold:#d8b36b;
-  --pale:#f7e4b8;
-  --cream:#fff5e6;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;background:var(--wine);color:var(--cream);
-  font-family:'Cormorant Garamond',serif;overflow-x:hidden
-}
-a{color:inherit}
-button{font:inherit;cursor:pointer}
-.script{font-family:'Great Vibes',cursive}
-.gold{color:var(--gold)}
-.kicker{
-  font:10px 'Montserrat',sans-serif;letter-spacing:3px;
-  text-transform:uppercase;color:var(--gold)
-}
-.btn{
-  display:inline-block;padding:14px 22px;
-  border:1px solid var(--gold);background:var(--gold);
-  color:var(--wine);text-decoration:none;
-  font:10px 'Montserrat',sans-serif;letter-spacing:1.5px;
-  text-transform:uppercase;transition:.3s
-}
-.btn:hover{background:transparent;color:var(--gold)}
-section{padding:80px 20px;text-align:center;position:relative}
-.heading{
-  font-size:clamp(38px,8vw,62px);font-weight:300;
-  line-height:1.1;margin:16px 0 25px
-}
-.copy{max-width:620px;margin:auto;font-size:19px;line-height:1.8}
-.rule{height:1px;width:90px;background:var(--gold);margin:25px auto}
-
-/* Floating golden decorations */
-#petals{
-  position:fixed;inset:0;pointer-events:none;
-  overflow:hidden;z-index:15
-}
-.petal{
-  position:absolute;top:-30px;color:var(--gold);
-  animation:fall linear forwards;opacity:.8
-}
-@keyframes fall{
-  to{transform:translate3d(var(--drift,30px),110vh,0) rotate(600deg);opacity:0}
-}
-@keyframes glow{
-  from{text-shadow:0 0 4px #d8b36b44}
-  to{text-shadow:0 0 20px #f7e4b8}
-}
-@keyframes rise{
-  from{opacity:0;transform:translateY(25px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* ======================================
-   PREMIUM 3D WEDDING ENVELOPE
-====================================== */
-#envelope{
-  position:fixed;inset:0;z-index:100;
-  background:
-    radial-gradient(ellipse at 50% 45%,#74253c 0%,#481020 48%,#1c0309 100%);
-  display:grid;place-items:center;padding:24px;
-  overflow:hidden;
-  perspective:1400px;
-  transition:opacity .9s ease,visibility .9s ease
-}
-#envelope.closed{
-  opacity:0;visibility:hidden;pointer-events:none
-}
-#envelope:before,#envelope:after{
-  content:"";position:absolute;width:min(85vw,450px);
-  aspect-ratio:1;border:1px solid #d8b36b25;
-  border-radius:50%;pointer-events:none
-}
-#envelope:after{width:min(68vw,340px)}
-
-.env-inner{
-  width:min(100%,410px);
-  text-align:center;position:relative;z-index:2
-}
-.env-title{
-  font:10px 'Montserrat',sans-serif;letter-spacing:4px;
-  color:var(--gold);margin-bottom:30px;
-  animation:rise 1s both
-}
-.env-subtitle{
-  font-size:17px;color:#f5dba7;
-  margin-top:27px;transition:opacity .4s
-}
-
-/* Scene supplies perspective for the entire envelope */
-.envelope-scene{
-  position:relative;
-  width:100%;
-  height:245px;
-  perspective:1200px;
-  transform-style:preserve-3d;
-  animation:envelopeFloat 4s ease-in-out infinite;
-}
-.envelope-shadow{
-  position:absolute;left:8%;right:8%;bottom:-14px;
-  height:22px;border-radius:50%;background:#000;
-  filter:blur(15px);opacity:.65;
-  transition:transform 1s,opacity 1s
-}
-.envelope{
-  position:absolute;inset:0;
-  transform-style:preserve-3d;
-  isolation:isolate;
-}
-.env-back{
-  position:absolute;inset:0;
-  border:1px solid #d9b56f;
-  border-radius:4px;
-  background:linear-gradient(140deg,#84273d,#4c0a1d 65%,#6c1930);
-  box-shadow:0 22px 60px #0008,inset 0 0 25px #e8c47716;
-}
-.env-letter{
-  position:absolute;
-  top:5%;left:7%;width:86%;height:90%;
-  z-index:2;
-  padding:14px 8px;
-  background:linear-gradient(140deg,#fff9eb,#f1dfb8 65%,#e4c78e);
-  border:1px solid #d8b36b;
-  outline:1px solid #b88a42;outline-offset:-7px;
-  color:var(--wine);
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  transform:translateY(0) translateZ(-4px);
-  transition:transform 1.35s cubic-bezier(.16,.75,.2,1) .2s;
-}
-.letter-flower{
-  color:#a67b36;font-size:20px;line-height:1
-}
-.letter-label{
-  font:8px 'Montserrat',sans-serif;
-  letter-spacing:2px;margin-top:9px
-}
-.letter-names{
-  font-size:30px;line-height:1.1;
-  color:#71182c;margin:10px 0 6px
-}
-.letter-date{
-  font:8px 'Montserrat',sans-serif;
-  letter-spacing:2px;margin-top:10px
-}
-
-/* Lower envelope pocket */
-.env-pocket{
-  position:absolute;inset:0;z-index:4;
-  background:linear-gradient(140deg,#7c2036,#4b091b 80%);
-  clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);
-  border:1px solid #b68b4b;
-  pointer-events:none
-}
-.env-pocket:after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(35deg,#b64a5c33,transparent 48%,#1e020a55);
-}
-
-/* Independently rotating 3D flap */
-.env-flap{
-  position:absolute;inset:0;
-  z-index:5;
-  transform-origin:top center;
-  transform-style:preserve-3d;
-  transition:transform 1.15s cubic-bezier(.2,.7,.15,1);
-  backface-visibility:visible;
-}
-.env-flap-front,.env-flap-back{
-  position:absolute;inset:0;
-  clip-path:polygon(0 0,100% 0,50% 66%);
-  backface-visibility:hidden;
-}
-.env-flap-front{
-  background:linear-gradient(145deg,#a84a60,#792039 60%,#531022);
-  filter:drop-shadow(0 5px 5px #21040b55);
-}
-.env-flap-back{
-  background:linear-gradient(145deg,#f5e4bd,#c8a05b);
-  transform:rotateX(180deg);
-}
-
-/* Front folds */
-.env-front{
-  position:absolute;inset:0;z-index:6;
-  background:
-    linear-gradient(32deg,transparent 49.3%,#a55362 49.8%,transparent 50.5%),
-    linear-gradient(-32deg,transparent 49.3%,#68192e 49.8%,transparent 50.5%);
-  pointer-events:none
-}
-
-/* Wax seal */
-.seal{
-  position:absolute;z-index:8;
-  left:50%;top:54%;
-  transform:translate(-50%,-50%);
-  width:58px;height:58px;border-radius:50%;
-  display:grid;place-items:center;
-  background:radial-gradient(circle at 30% 25%,#e5c47a,#b7863e 60%,#795020);
-  color:#501020;border:2px solid #f0d18a;
-  box-shadow:0 5px 15px #17020877,inset 0 0 0 3px #7d512633;
-  transition:opacity .45s,transform .6s,filter .5s;
-}
-.seal:before{
-  content:"";position:absolute;inset:5px;
-  border:1px solid #70431c;border-radius:50%;opacity:.7
-}
-.seal span{position:relative;font-family:'Great Vibes',cursive;font-size:25px}
-
-/* Tap/open control */
-.open-btn{
-  margin-top:32px;
-  position:relative;z-index:10;
-  box-shadow:0 6px 25px #0003;
-  transition:background .3s,color .3s,transform .3s,opacity .4s
-}
-.open-btn:hover{transform:translateY(-2px)}
-.open-btn:disabled{opacity:.65;cursor:default}
-.tap-hint{
-  font:9px 'Montserrat',sans-serif;
-  letter-spacing:2px;color:#e8c982;
-  margin-top:16px;animation:hintPulse 2s infinite
-}
-@keyframes hintPulse{50%{opacity:.45}}
-@keyframes envelopeFloat{
-  0%,100%{transform:translateY(0) rotateX(0)}
-  50%{transform:translateY(-7px) rotateX(1deg)}
-}
-
-/* The actual 3D opening sequence */
-#envelope.opening .env-flap{
-  transform:rotateX(180deg);
-  z-index:1;
-}
-#envelope.opening .env-letter{
-  transform:translateY(-115px) translateZ(55px) scale(1.04);
-}
-#envelope.opening .seal{
-  opacity:0;filter:blur(8px);
-  transform:translate(-50%,-50%) scale(1.8) rotate(25deg)
-}
-#envelope.opening .env-front{
-  opacity:.2;transition:opacity .5s
-}
-#envelope.opening .envelope-shadow{
-  transform:scaleX(1.25);opacity:.35
-}
-#envelope.opening .envelope-scene{animation:none}
-#envelope.opening .tap-hint{opacity:0}
-
-/* Gold sparkle particles */
-#envelopeParticles{
-  position:absolute;inset:0;overflow:hidden;
-  pointer-events:none;z-index:9
-}
-.spark{
-  position:absolute;width:4px;height:4px;
-  background:#ffe9ad;border-radius:50%;
-  box-shadow:0 0 10px 3px #d8b36b88;
-  animation:sparkle 1.5s ease-out forwards
-}
-@keyframes sparkle{
-  0%{opacity:0;transform:translate(0,0) scale(.3)}
-  20%{opacity:1}
-  100%{opacity:0;transform:translate(var(--sx),var(--sy)) scale(0)}
-}
-
-/* Royal main invitation */
-.hero{
-  min-height:100svh;display:flex;align-items:center;
-  justify-content:center;padding:45px 18px;
-  background:radial-gradient(ellipse at 50% 35%,#7c2a40,#4a0d20 50%,#20030a);
-  overflow:hidden
-}
-.hero-frame{
-  width:min(100%,620px);padding:45px 18px 35px;
-  border:1px solid var(--gold);outline:1px solid #96713b;
-  outline-offset:7px;text-align:center;position:relative
-}
-.hero-frame:before,.hero-frame:after{
-  position:absolute;color:var(--gold);font-size:22px;content:"✧"
-}
-.hero-frame:before{top:10px;left:12px}
-.hero-frame:after{bottom:10px;right:12px}
-.hero h1{
-  font-size:clamp(65px,14vw,100px);font-weight:400;
-  line-height:.85;color:var(--pale);margin:28px 0
-}
-.hero h1 span{
-  display:block;font-family:'Great Vibes',cursive;
-  font-size:.5em;line-height:1.3;color:var(--cream)
-}
-.hero-date{font-size:24px;color:var(--pale);letter-spacing:2px}
-.hero-ornament{
-  color:var(--gold);font-size:23px;letter-spacing:8px;
-  animation:glow 2.5s ease-in-out infinite alternate
-}
-.hero-sub{
-  font:10px 'Montserrat',sans-serif;
-  letter-spacing:3px;text-transform:uppercase
-}
-.hero .btn{margin-top:15px}
-
-/* Stylized animated bride and groom */
-.couple-stage{
-  position:relative;width:min(100%,440px);height:260px;
-  margin:25px auto 5px;display:flex;align-items:flex-end;
-  justify-content:center;overflow:hidden
-}
-.couple-stage:before{
-  content:"";position:absolute;bottom:0;width:220px;height:220px;
-  border:1px solid var(--gold);border-radius:50% 50% 0 0;
-  border-bottom:0;background:radial-gradient(ellipse,#d8b36b25,transparent 70%)
-}
-.couple-stage:after{
-  content:"✦ ❋ ✧ ❦ ✧ ❋ ✦";position:absolute;top:15px;
-  color:var(--gold);letter-spacing:6px;animation:glow 2s infinite alternate
-}
-.person{
-  position:relative;width:145px;height:215px;opacity:0;
-  animation:coupleIn 1.5s ease-out forwards
-}
-.person.bride{z-index:2;margin-right:-15px}
-.person.groom{margin-left:-15px;animation-delay:.5s}
-.head{
-  position:absolute;top:22px;left:52px;width:43px;height:47px;
-  border-radius:48%;background:linear-gradient(90deg,#8b5038,#d7a17c,#895039)
-}
-.hair{
-  position:absolute;top:12px;left:47px;width:53px;height:49px;
-  border-radius:50% 50% 20% 20%;background:#211018
-}
-.bride .hair{height:55px}
-.person-body{
-  position:absolute;top:63px;left:18px;width:108px;height:152px;
-  clip-path:polygon(35% 0,65% 0,80% 25%,100% 100%,0 100%,20% 25%)
-}
-.bride .person-body{background:linear-gradient(90deg,#410817,#8e263e,#500b20)}
-.groom .person-body{
-  background:linear-gradient(90deg,#21040b,#591629,#26040c);
-  clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)
-}
-.bride .person-body:after{
-  content:"✦ ✧ ✦";position:absolute;top:30px;left:17px;
-  color:var(--gold);line-height:2.2
-}
-.groom .person-body:after{
-  content:"";position:absolute;top:0;left:49%;
-  width:2px;height:100%;background:var(--gold)
-}
-.bride .head:after{
-  content:"✦";position:absolute;top:-15px;left:11px;
-  color:var(--gold);font-size:17px
-}
-@keyframes coupleIn{
-  from{opacity:0;transform:translateY(35px) scale(.85);filter:blur(6px)}
-  to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
-}
-
-/* Introduction */
-.couple-caption{animation:rise 1.3s 1s both}
-#intro{background:var(--cream);color:var(--wine)}
-#intro .heading{color:var(--wine)}
-.monogram{
-  width:105px;height:105px;border:1px solid #b58a45;
-  border-radius:50%;outline:1px solid #d8bd84;outline-offset:5px;
-  margin:25px auto;display:grid;place-items:center;
-  font-size:34px;color:#9b6c2c
-}
-
-/* Live countdown */
-#countdown{background:linear-gradient(145deg,#4b1022,#23040b)}
-.count-grid{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:30px auto}
-.count-box{width:100px;border:1px solid #9e783f;padding:16px 8px}
-.count-box strong{display:block;font-size:40px;font-weight:300;color:var(--pale)}
-.count-box span{font:9px 'Montserrat',sans-serif;letter-spacing:2px;color:var(--gold)}
-
-/* Story and photos */
-#story{background:#f5ead9;color:var(--wine)}
-#story .heading{color:var(--wine)}
-.story-grid{
-  display:grid;grid-template-columns:1fr 1fr;align-items:center;
-  gap:25px;max-width:900px;margin:35px auto 0;text-align:left
-}
-.story-photo{
-  display:block;width:100%;aspect-ratio:4/5;object-fit:cover;
-  border:6px solid white;outline:1px solid #c6a36a;outline-offset:-12px
-}
-.story-text h3{font-size:36px;font-weight:400;margin:15px 0}
-.story-text p{font-size:18px;line-height:1.8}
-#gallery{background:#300610}
-.gallery-grid{
-  max-width:950px;margin:35px auto 0;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:12px
-}
-.gallery-grid img{
-  display:block;width:100%;aspect-ratio:3/4;object-fit:cover;
-  border:1px solid #98713a;transition:transform .4s
-}
-.gallery-grid img:hover{transform:scale(1.025)}
-.placeholder{
-  aspect-ratio:3/4;background:linear-gradient(140deg,#702b40,#29050e);
-  display:grid;place-items:center;color:var(--gold);
-  font-size:40px;border:1px solid #98713a
-}
-
-/* Events */
-#events{background:var(--cream);color:var(--wine)}
-#events .heading{color:var(--wine)}
-.event-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:16px;max-width:950px;margin:35px auto 0
-}
-.event{
-  border:1px solid #c3a165;padding:28px 15px;
-  background:linear-gradient(145deg,#fffaf2,#f0dfc5)
-}
-.event .symbol{font-size:32px;color:#9a6b2e}
-.event h3{font-size:27px;font-weight:400;margin:13px 0}
-.event p{font-size:17px;line-height:1.7}
-
-/* Venue and closing */
-#venue{background:radial-gradient(ellipse at center,#6b2035,#28040d)}
-.address{font-size:21px;line-height:1.8}
-#closing{background:var(--cream);color:var(--wine)}
-#closing .heading{color:var(--wine)}
-#closing .script{font-size:clamp(48px,10vw,78px);color:#8e5b24}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s,transform .8s}
-.reveal.visible{opacity:1;transform:translateY(0)}
-footer{
-  text-align:center;padding:30px 15px;
-  font:9px 'Montserrat',sans-serif;letter-spacing:2px;
-  line-height:2;color:var(--gold)
-}
-.music-btn{
-  position:fixed;right:16px;bottom:16px;z-index:30;
-  padding:12px 15px;border:1px solid var(--gold);
-  background:#350713eF;color:var(--gold);
-  font:9px 'Montserrat',sans-serif;letter-spacing:1px;
-  border-radius:30px;backdrop-filter:blur(8px)
-}
-.music-btn:hover{background:var(--gold);color:var(--wine)}
-@media(max-width:650px){
-  section{padding:70px 17px}
-  .story-grid{grid-template-columns:1fr;max-width:430px}
-  .story-photo{max-height:440px}
-  .event-grid{grid-template-columns:1fr;max-width:430px}
-  .gallery-grid{grid-template-columns:repeat(2,1fr);gap:8px}
-  .gallery-grid img:last-child{grid-column:span 2;aspect-ratio:4/3}
-  .count-box{width:calc(50% - 8px);max-width:130px}
-  .address{font-size:18px}
-  .envelope-scene{height:220px}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*:before,*:after{
-    animation:none!important;scroll-behavior:auto!important;
-    transition:none!important
-  }
-  .reveal,.person,.couple-caption{opacity:1;transform:none;filter:none}
-}
-</style>
-</head>
-
-<body>
-<div id="petals"></div>
-
-<!-- ENVELOPE OPENING -->
-<div id="envelope">
-  <div class="env-inner">
-    <p class="env-title">A PERSONAL INVITATION</p>
-
-    <div class="envelope-scene" id="envelopeScene">
-      <div class="envelope-shadow"></div>
-
-      <div class="envelope" id="envBox">
-        <div class="env-back"></div>
-
-        <div class="env-letter">
-          <div class="letter-flower">✧ ❦ ✧</div>
-          <p class="letter-label">YOU ARE INVITED</p>
-          <div class="letter-names script">
-            Simran<br>& Nitesh
-          </div>
-          <p class="letter-label">TOGETHER FOREVER</p>
-          <p class="letter-date">25 · 11 · 2026</p>
-          <div class="letter-flower" style="margin-top:9px">✧</div>
-        </div>
-
-        <div class="env-pocket"></div>
-
-        <div class="env-flap">
-          <div class="env-flap-front"></div>
-          <div class="env-flap-back"></div>
-        </div>
-
-        <div class="env-front"></div>
-
-        <div class="seal">
-          <span>S&amp;N</span>
-        </div>
-      </div>
-    </div>
-
-    <p class="script env-subtitle" id="envSubtitle">
-      A beautiful beginning awaits
-    </p>
-
-    <button class="btn open-btn" id="openInvite" type="button">
-      Open Your Invitation ✦
-    </button>
-
-    <p class="tap-hint" id="tapHint">✧ TAP TO UNVEIL THE MAGIC ✧</p>
-  </div>
-  <div id="envelopeParticles"></div>
-</div>
-
-<header class="hero" id="home">
-  <div class="hero-frame">
-    <div class="hero-ornament">❦ ✧ ❦</div>
-    <p class="kicker">Together with our families</p>
-    <p style="font-size:19px">We joyfully invite you to celebrate</p>
-    <h1>Simran<span>and</span>Nitesh</h1>
-    <div class="hero-ornament">✧ ❋ ✧</div>
-    <p class="hero-sub">Two hearts · One forever</p>
-    <p class="hero-date">25 November 2026</p>
-    <p class="hero-sub">Belgaum · Karnataka</p>
-
-    <div class="couple-stage" aria-label="Stylized bride and groom">
-      <div class="person bride">
-        <div class="hair"></div><div class="head"></div>
-        <div class="person-body"></div>
-      </div>
-      <div class="person groom">
-        <div class="hair"></div><div class="head"></div>
-        <div class="person-body"></div>
-      </div>
-    </div>
-
-    <div class="couple-caption">
-      <p class="script gold" style="font-size:35px;margin:8px">Two hearts, one forever</p>
-    </div>
-    <a class="btn" href="#intro">Discover Our Celebration ↓</a>
-  </div>
-</header>
-
-<section id="intro">
-  <div class="reveal">
-    <p class="kicker">A celebration of love</p>
-    <h2 class="heading">Our Forever Begins</h2>
-    <div class="monogram">S <span style="font-size:19px">&amp;</span> N</div>
-    <p class="copy">With the love and blessings of our families, we begin a new chapter together. It would mean the world to us to have you by our side as we celebrate a day filled with love, laughter and lifelong memories.</p>
-    <div class="rule"></div>
-    <p class="script" style="font-size:40px">With love, Simran &amp; Nitesh</p>
-  </div>
-</section>
-
-<section id="countdown">
-  <div class="reveal">
-    <p class="kicker">Save the date</p>
-    <h2 class="heading">Countdown to Forever</h2>
-    <div class="count-grid">
-      <div class="count-box"><strong id="days">--</strong><span>DAYS</span></div>
-      <div class="count-box"><strong id="hours">--</strong><span>HOURS</span></div>
-      <div class="count-box"><strong id="minutes">--</strong><span>MINUTES</span></div>
-      <div class="count-box"><strong id="seconds">--</strong><span>SECONDS</span></div>
-    </div>
-    <p style="font-size:18px">Wednesday · 25 November 2026</p>
-  </div>
-</section>
-
-<section id="story">
-  <div class="reveal">
-    <p class="kicker">A lifetime together</p>
-    <h2 class="heading">Our Story</h2>
-    <p class="copy">Every beautiful forever begins with a moment. Here is to the memories we cherish and all the wonderful moments still to come.</p>
-    <div class="story-grid">
-      <img class="story-photo" src="IMG-20261109-WA0000.jpg" alt="Simran and Nitesh" loading="lazy">
-      <div class="story-text">
-        <p class="kicker">Our next chapter</p>
-        <h3 class="script">A journey of love</h3>
-        <p>One promise, countless dreams and a lifetime to discover what forever means. We cannot wait to begin this adventure surrounded by our favourite people.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="gallery">
-  <div class="reveal">
-    <p class="kicker">Moments to treasure</p>
-    <h2 class="heading">Our Memories</h2>
-    <p class="copy">A little collection of love and beautiful memories.</p>
-    <div class="gallery-grid">
-      <img src="IMG-20261109-WA0000.jpg" alt="Simran and Nitesh memory one" loading="lazy">
-      <div class="placeholder" aria-label="Wedding memory decoration">✧</div>
-      <div class="placeholder" aria-label="Wedding memory decoration">❦</div>
-    </div>
-  </div>
-</section>
-
-<section id="events">
-  <div class="reveal">
-    <p class="kicker">The day we say forever</p>
-    <h2 class="heading">The Celebration</h2>
-    <p class="copy">Join our families for a beautiful day of love, tradition and blessings.</p>
-    <div class="event-grid">
-      <article class="event">
-        <div class="symbol">❋</div>
-        <p class="kicker">Our special day</p>
-        <h3>Wedding Ceremony</h3>
-        <p>Wednesday<br>25 November 2026</p>
-      </article>
-      <article class="event">
-        <div class="symbol">❦</div>
-        <p class="kicker">Celebrate together</p>
-        <h3>Family &amp; Friends</h3>
-        <p>Your love, laughter and blessings will make our celebration complete.</p>
-      </article>
-      <article class="event">
-        <div class="symbol">✧</div>
-        <p class="kicker">A new beginning</p>
-        <h3>Forever Begins</h3>
-        <p>One beautiful promise, a lifetime of memories.</p>
-      </article>
-    </div>
-    <p style="font-size:14px;margin-top:25px">Please confirm additional function timings with the family.</p>
-  </div>
-</section>
-
-<section id="venue">
-  <div class="reveal">
-    <p class="kicker">We cannot wait to see you</p>
-    <h2 class="heading">The Wedding Venue</h2>
-    <div class="rule"></div>
-    <p class="address">
-      <strong>Shri Tukaram Maharaj Sanskrutik Bhavan</strong><br>
-      Oriental School Campus, Tilakwadi<br>
-      Belgaum, Karnataka 590006
-    </p>
-    <a class="btn" target="_blank" rel="noopener"
-      href="https://www.google.com/maps/search/?api=1&query=Shri+Tukaram+Maharaj+Sanskrutik+Bhavan+Oriental+School+Campus+Tilakwadi+Belgaum+Karnataka+590006">Get Directions ↗</a>
-  </div>
-</section>
-
-<section id="closing">
-  <div class="reveal">
-    <p class="kicker">Made more beautiful by your presence</p>
-    <h2 class="heading">Until We Celebrate Together</h2>
-    <p class="copy">Your presence and blessings are the most precious gifts we could ask for. Thank you for being part of our story.</p>
-    <div class="rule"></div>
-    <p class="script" style="font-size:65px;color:#8e5b24">Simran &amp; Nitesh</p>
-    <p class="kicker">25 · 11 · 2026</p>
-    <a class="btn" href="#home">Back to the Beginning ↑</a>
-  </div>
-</section>
-
-<footer>CRAFTED WITH LOVE · SIMRAN &amp; NITESH · 2026</footer>
-
-<audio id="music" src="music/wedding-instrumental.mp3" loop preload="none"></audio>
+  </div>  
+</header>  <section id="intro">  
+  <div class="reveal">  
+    <p class="kicker">A celebration of love</p>  
+    <h2 class="heading">Our Forever Begins</h2>  
+    <div class="monogram">S <span style="font-size:19px">&</span> N</div>  
+    <p class="copy">With the love and blessings of our families, we begin a new chapter together. It would mean the world to us to have you by our side as we celebrate a day filled with love, laughter and lifelong memories.</p>  
+    <div class="rule"></div>  
+    <p class="script" style="font-size:40px">With love, Simran & Nitesh</p>  
+  </div>  
+</section>  <section id="countdown">  
+  <div class="reveal">  
+    <p class="kicker">Save the date</p>  
+    <h2 class="heading">Countdown to Forever</h2>  
+    <div class="count-grid">  
+      <div class="count-box"><strong id="days">--</strong><span>DAYS</span></div>  
+      <div class="count-box"><strong id="hours">--</strong><span>HOURS</span></div>  
+      <div class="count-box"><strong id="minutes">--</strong><span>MINUTES</span></div>  
+      <div class="count-box"><strong id="seconds">--</strong><span>SECONDS</span></div>  
+    </div>  
+    <p style="font-size:18px">Wednesday · 25 November 2026</p>  
+  </div>  
+</section>  <section id="story">  
+  <div class="reveal">  
+    <p class="kicker">A lifetime together</p>  
+    <h2 class="heading">Our Story</h2>  
+    <p class="copy">Every beautiful forever begins with a moment. Here is to the memories we cherish and all the wonderful moments still to come.</p>  
+    <div class="story-grid">  
+      <img class="story-photo" src="IMG-20261109-WA0000.jpg" alt="Simran and Nitesh" loading="lazy">  
+      <div class="story-text">  
+        <p class="kicker">Our next chapter</p>  
+        <h3 class="script">A journey of love</h3>  
+        <p>One promise, countless dreams and a lifetime to discover what forever means. We cannot wait to begin this adventure surrounded by our favourite people.</p>  
+      </div>  
+    </div>  
+  </div>  
+</section>  <section id="events">  
+  <div class="reveal">  
+    <p class="kicker">The day we say forever</p>  
+    <h2 class="heading">The Celebration</h2>  
+    <p class="copy">Join our families for a beautiful day of love, tradition and blessings.</p>  
+    <div class="event-grid">  
+      <article class="event">  
+        <div class="symbol">❋</div>  
+        <p class="kicker">Our special day</p>  
+        <h3>Wedding Ceremony</h3>  
+        <p>Wednesday<br>25 November 2026</p>  
+      </article>  
+      <article class="event">  
+        <div class="symbol">❦</div>  
+        <p class="kicker">Celebrate together</p>  
+        <h3>Family & Friends</h3>  
+        <p>Your love, laughter and blessings will make our celebration complete.</p>  
+      </article>  
+      <article class="event">  
+        <div class="symbol">✧</div>  
+        <p class="kicker">A new beginning</p>  
+        <h3>Forever Begins</h3>  
+        <p>One beautiful promise, a lifetime of memories.</p>  
+      </article>  
+    </div>  
+    <p style="font-size:14px;margin-top:25px">Please confirm additional function timings with the family.</p>  
+  </div>  
+</section>  <section id="venue">  
+  <div class="reveal">  
+    <p class="kicker">We cannot wait to see you</p>  
+    <h2 class="heading">The Wedding Venue</h2>  
+    <div class="rule"></div>  
+    <p class="address">  
+      <strong>Shri Tukaram Maharaj Sanskrutik Bhavan</strong><br>  
+      Oriental School Campus, Tilakwadi<br>  
+      Belgaum, Karnataka 590006  
+    </p>  
+    <a class="btn" target="_blank" rel="noopener"  
+      href="https://www.google.com/maps/search/?api=1&query=Shri+Tukaram+Maharaj+Sanskrutik+Bhavan+Oriental+School+Campus+Tilakwadi+Belgaum+Karnataka+590006">Get Directions ↗</a>  
+  </div>  
+</section>  <section id="closing">  
+  <div class="reveal">  
+    <p class="kicker">Made more beautiful by your presence</p>  
+    <h2 class="heading">Until We Celebrate Together</h2>  
+    <p class="copy">Your presence and blessings are the most precious gifts we could ask for. Thank you for being part of our story.</p>  
+    <div class="rule"></div>  
+    <p class="script" style="font-size:65px;color:#8e5b24">Simran & Nitesh</p>  
+    <p class="kicker">25 · 11 · 2026</p>  
+    <a class="btn" href="#home">Back to the Beginning ↑</a>  
+  </div>  
+</section>  <footer>CRAFTED WITH LOVE · SIMRAN & NITESH · 2026</footer>  <!-- Add your MP3 at music/wedding-instrumental.mp3 -->  <audio id="music" src="music/wedding-instrumental.mp3" loop preload="none"></audio>
 <button class="music-btn" id="musicToggle" type="button">♫ MUSIC: OFF</button>
 
-<script>
-/* ======================================
-   ENVELOPE: 3D OPENING SEQUENCE
-====================================== */
-const envelope=document.getElementById('envelope');
-const envBox=document.getElementById('envBox');
-const openButton=document.getElementById('openInvite');
-const envSubtitle=document.getElementById('envSubtitle');
-const tapHint=document.getElementById('tapHint');
-const particleLayer=document.getElementById('envelopeParticles');
-
-let envelopeOpened=false;
-
-function burstSparkles(count=36){
-  const rect=envBox.getBoundingClientRect();
-  const cx=rect.left+rect.width/2;
-  const cy=rect.top+rect.height/2;
-
-  for(let i=0;i<count;i++){
-    const spark=document.createElement('span');
-    spark.className='spark';
-    spark.style.left=cx+'px';
-    spark.style.top=cy+'px';
-
-    const angle=Math.random()*Math.PI*2;
-    const distance=55+Math.random()*180;
-
-    spark.style.setProperty('--sx',Math.cos(angle)*distance+'px');
-    spark.style.setProperty('--sy',Math.sin(angle)*distance+'px');
-    spark.style.animationDelay=(Math.random()*.3)+'s';
-
-    particleLayer.appendChild(spark);
-    spark.addEventListener('animationend',()=>spark.remove());
-  }
-}
-
-function openInvitation(){
-  if(envelopeOpened)return;
-  envelopeOpened=true;
-  openButton.disabled=true;
-  openButton.textContent='Unveiling your invitation...';
-  envSubtitle.style.opacity='0';
-  tapHint.style.opacity='0';
-
-  // Wax seal disappears as the envelope flap rotates backward.
-  envelope.classList.add('opening');
-  burstSparkles(42);
-
-  // A second burst follows the card as it rises.
-  setTimeout(()=>burstSparkles(24),650);
-
-  // Reveal the original website after the 3D animation.
-  setTimeout(()=>{
-    envelope.classList.add('closed');
-    document.body.style.overflowY='auto';
-    document.getElementById('home').scrollIntoView({behavior:'auto'});
-    createPetals(20);
-  },1900);
-}
-
-openButton.addEventListener('click',openInvitation);
-
-envBox.addEventListener('click',openInvitation);
-
-document.getElementById('envelopeScene').addEventListener('keydown',e=>{
-  if(e.key==='Enter'||e.key===' '){
-    e.preventDefault();
-    openInvitation();
-  }
-});
-
-/* Countdown */
-const weddingDate=new Date('2026-11-25T00:00:00+05:30').getTime();
-
-function updateCountdown(){
-  const diff=Math.max(0,weddingDate-Date.now());
-  document.getElementById('days').textContent=Math.floor(diff/86400000);
-  document.getElementById('hours').textContent=Math.floor(diff%86400000/3600000);
-  document.getElementById('minutes').textContent=Math.floor(diff%3600000/60000);
-  document.getElementById('seconds').textContent=Math.floor(diff%60000/1000);
-}
-updateCountdown();
-setInterval(updateCountdown,1000);
-
-/* Scroll reveal */
-if('IntersectionObserver' in window){
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  },{threshold:.12});
-
-  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-}else{
-  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
-}
-
-/* Falling gold petals */
-const petals=document.getElementById('petals');
-
-function createPetals(count=1){
-  for(let i=0;i<count;i++){
-    const p=document.createElement('span');
-    p.className='petal';
-    p.textContent=['✦','❋','✧','❦'][Math.floor(Math.random()*4)];
-    p.style.left=Math.random()*100+'vw';
-    p.style.fontSize=(10+Math.random()*16)+'px';
-    p.style.animationDuration=(8+Math.random()*8)+'s';
-    p.style.setProperty('--drift',(Math.random()*160-80)+'px');
-    petals.appendChild(p);
-    p.addEventListener('animationend',()=>p.remove());
-  }
-}
-setInterval(()=>createPetals(1),900);
-
-/* Optional music: requires your own MP3 file */
-const music=document.getElementById('music');
-const musicToggle=document.getElementById('musicToggle');
-
-musicToggle.addEventListener('click',async()=>{
-  if(music.paused){
-    try{
-      await music.play();
-      musicToggle.textContent='♫ MUSIC: ON';
-    }catch(error){
-      alert('Upload your instrumental MP3 to music/wedding-instrumental.mp3 first.');
-    }
-  }else{
-    music.pause();
-    musicToggle.textContent='♫ MUSIC: OFF';
-  }
-});
-</script>
-</body>
+<script>  
+const envelope=document.getElementById('envelope');  
+  
+document.getElementById('openInvite').addEventListener('click',()=>{  
+  document.getElementById('envBox').classList.add('open');  
+  document.getElementById('openInvite').textContent='Opening...';  
+  setTimeout(()=>envelope.classList.add('closed'),1100);  
+});  
+  
+/* Countdown */  
+const weddingDate=new Date('2026-11-25T00:00:00+05:30').getTime();  
+  
+function updateCountdown(){  
+  const diff=Math.max(0,weddingDate-Date.now());  
+  document.getElementById('days').textContent=Math.floor(diff/86400000);  
+  document.getElementById('hours').textContent=Math.floor(diff%86400000/3600000);  
+  document.getElementById('minutes').textContent=Math.floor(diff%3600000/60000);  
+  document.getElementById('seconds').textContent=Math.floor(diff%60000/1000);  
+}  
+  
+updateCountdown();  
+setInterval(updateCountdown,1000);  
+  
+/* Scroll reveal */  
+if('IntersectionObserver' in window){  
+  const observer=new IntersectionObserver(entries=>{  
+    entries.forEach(entry=>{  
+      if(entry.isIntersecting){  
+        entry.target.classList.add('visible');  
+        observer.unobserve(entry.target);  
+      }  
+    });  
+  },{threshold:.12});  
+  
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));  
+}else{  
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));  
+}  
+  
+/* Golden falling petals */  
+const petals=document.getElementById('petals');  
+  
+function addPetal(){  
+  const p=document.createElement('span');  
+  p.className='petal';  
+  p.textContent=['✦','❋','✧','❦'][Math.floor(Math.random()*4)];  
+  p.style.left=Math.random()*100+'vw';  
+  p.style.fontSize=(10+Math.random()*16)+'px';  
+  p.style.animationDuration=(8+Math.random()*8)+'s';  
+  petals.appendChild(p);  
+  setTimeout(()=>p.remove(),17000);  
+}  
+  
+setInterval(addPetal,900);  
+  
+/* Optional music */  
+const music=document.getElementById('music');  
+const musicToggle=document.getElementById('musicToggle');  
+  
+musicToggle.addEventListener('click',async()=>{  
+  if(music.paused){  
+    try{  
+      await music.play();  
+      musicToggle.textContent='♫ MUSIC: ON';  
+    }catch(error){  
+      alert('Upload your instrumental MP3 to music/wedding-instrumental.mp3 first.');  
+    }  
+  }else{  
+    music.pause();  
+    musicToggle.textContent='♫ MUSIC: OFF';  
+  }  
+});  
+</script>  </body>  
 </html>
