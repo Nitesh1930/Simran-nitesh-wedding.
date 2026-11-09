@@ -47,14 +47,17 @@ section{padding:80px 20px;text-align:center;position:relative}
 .copy{max-width:620px;margin:auto;font-size:19px;line-height:1.8}
 .rule{height:1px;width:90px;background:var(--gold);margin:25px auto}
 
-/* Falling gold decorations */
-#petals{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:15}
+/* Floating golden decorations */
+#petals{
+  position:fixed;inset:0;pointer-events:none;
+  overflow:hidden;z-index:15
+}
 .petal{
   position:absolute;top:-30px;color:var(--gold);
   animation:fall linear forwards;opacity:.8
 }
 @keyframes fall{
-  to{transform:translateY(110vh) rotate(600deg);opacity:0}
+  to{transform:translate3d(var(--drift,30px),110vh,0) rotate(600deg);opacity:0}
 }
 @keyframes glow{
   from{text-shadow:0 0 4px #d8b36b44}
@@ -65,53 +68,219 @@ section{padding:80px 20px;text-align:center;position:relative}
   to{opacity:1;transform:translateY(0)}
 }
 
-/* Opening envelope */
+/* ======================================
+   PREMIUM 3D WEDDING ENVELOPE
+====================================== */
 #envelope{
   position:fixed;inset:0;z-index:100;
-  background:radial-gradient(ellipse,#6c2036,#25030c);
+  background:
+    radial-gradient(ellipse at 50% 45%,#74253c 0%,#481020 48%,#1c0309 100%);
   display:grid;place-items:center;padding:24px;
-  transition:opacity 1s,visibility 1s
+  overflow:hidden;
+  perspective:1400px;
+  transition:opacity .9s ease,visibility .9s ease
 }
-#envelope.closed{opacity:0;visibility:hidden;pointer-events:none}
-.env-inner{width:min(100%,410px);text-align:center}
+#envelope.closed{
+  opacity:0;visibility:hidden;pointer-events:none
+}
+#envelope:before,#envelope:after{
+  content:"";position:absolute;width:min(85vw,450px);
+  aspect-ratio:1;border:1px solid #d8b36b25;
+  border-radius:50%;pointer-events:none
+}
+#envelope:after{width:min(68vw,340px)}
+
+.env-inner{
+  width:min(100%,410px);
+  text-align:center;position:relative;z-index:2
+}
 .env-title{
   font:10px 'Montserrat',sans-serif;letter-spacing:4px;
-  color:var(--gold);margin-bottom:25px
+  color:var(--gold);margin-bottom:30px;
+  animation:rise 1s both
+}
+.env-subtitle{
+  font-size:17px;color:#f5dba7;
+  margin-top:27px;transition:opacity .4s
+}
+
+/* Scene supplies perspective for the entire envelope */
+.envelope-scene{
+  position:relative;
+  width:100%;
+  height:245px;
+  perspective:1200px;
+  transform-style:preserve-3d;
+  animation:envelopeFloat 4s ease-in-out infinite;
+}
+.envelope-shadow{
+  position:absolute;left:8%;right:8%;bottom:-14px;
+  height:22px;border-radius:50%;background:#000;
+  filter:blur(15px);opacity:.65;
+  transition:transform 1s,opacity 1s
 }
 .envelope{
-  height:245px;position:relative;perspective:1000px;
-  background:#681c30;border:1px solid var(--gold);
-  box-shadow:0 20px 60px #0007
+  position:absolute;inset:0;
+  transform-style:preserve-3d;
+  isolation:isolate;
+}
+.env-back{
+  position:absolute;inset:0;
+  border:1px solid #d9b56f;
+  border-radius:4px;
+  background:linear-gradient(140deg,#84273d,#4c0a1d 65%,#6c1930);
+  box-shadow:0 22px 60px #0008,inset 0 0 25px #e8c47716;
 }
 .env-letter{
-  position:absolute;top:5%;left:8%;width:84%;height:90%;
-  background:linear-gradient(140deg,#fff4dd,#e5c990);
-  color:var(--wine);display:grid;place-items:center;
-  transition:transform 1s .3s;z-index:1
+  position:absolute;
+  top:5%;left:7%;width:86%;height:90%;
+  z-index:2;
+  padding:14px 8px;
+  background:linear-gradient(140deg,#fff9eb,#f1dfb8 65%,#e4c78e);
+  border:1px solid #d8b36b;
+  outline:1px solid #b88a42;outline-offset:-7px;
+  color:var(--wine);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  transform:translateY(0) translateZ(-4px);
+  transition:transform 1.35s cubic-bezier(.16,.75,.2,1) .2s;
 }
-.env-flap{
-  position:absolute;inset:0;
-  background:linear-gradient(140deg,#a74a60,#6a1b30);
-  clip-path:polygon(0 0,100% 0,50% 65%);
-  transform-origin:top;transition:transform 1s;z-index:3
+.letter-flower{
+  color:#a67b36;font-size:20px;line-height:1
 }
-.env-front{
-  position:absolute;inset:0;z-index:2;
-  background:linear-gradient(32deg,transparent 49.5%,#9d4a59 50%,transparent 50.5%),
-  linear-gradient(-32deg,transparent 49.5%,#6a1a2d 50%,transparent 50.5%);
+.letter-label{
+  font:8px 'Montserrat',sans-serif;
+  letter-spacing:2px;margin-top:9px
+}
+.letter-names{
+  font-size:30px;line-height:1.1;
+  color:#71182c;margin:10px 0 6px
+}
+.letter-date{
+  font:8px 'Montserrat',sans-serif;
+  letter-spacing:2px;margin-top:10px
+}
+
+/* Lower envelope pocket */
+.env-pocket{
+  position:absolute;inset:0;z-index:4;
+  background:linear-gradient(140deg,#7c2036,#4b091b 80%);
+  clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);
+  border:1px solid #b68b4b;
   pointer-events:none
 }
-.seal{
-  position:absolute;z-index:4;left:50%;top:55%;
-  transform:translate(-50%,-50%);
-  width:54px;height:54px;border-radius:50%;
-  display:grid;place-items:center;background:var(--gold);
-  color:var(--wine);border:2px solid #8e632a;transition:.3s
+.env-pocket:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(35deg,#b64a5c33,transparent 48%,#1e020a55);
 }
-#envelope.open .env-flap{transform:rotateX(180deg)}
-#envelope.open .env-letter{transform:translateY(-90px) scale(1.03)}
-#envelope.open .seal{opacity:0}
-.open-btn{margin-top:32px}
+
+/* Independently rotating 3D flap */
+.env-flap{
+  position:absolute;inset:0;
+  z-index:5;
+  transform-origin:top center;
+  transform-style:preserve-3d;
+  transition:transform 1.15s cubic-bezier(.2,.7,.15,1);
+  backface-visibility:visible;
+}
+.env-flap-front,.env-flap-back{
+  position:absolute;inset:0;
+  clip-path:polygon(0 0,100% 0,50% 66%);
+  backface-visibility:hidden;
+}
+.env-flap-front{
+  background:linear-gradient(145deg,#a84a60,#792039 60%,#531022);
+  filter:drop-shadow(0 5px 5px #21040b55);
+}
+.env-flap-back{
+  background:linear-gradient(145deg,#f5e4bd,#c8a05b);
+  transform:rotateX(180deg);
+}
+
+/* Front folds */
+.env-front{
+  position:absolute;inset:0;z-index:6;
+  background:
+    linear-gradient(32deg,transparent 49.3%,#a55362 49.8%,transparent 50.5%),
+    linear-gradient(-32deg,transparent 49.3%,#68192e 49.8%,transparent 50.5%);
+  pointer-events:none
+}
+
+/* Wax seal */
+.seal{
+  position:absolute;z-index:8;
+  left:50%;top:54%;
+  transform:translate(-50%,-50%);
+  width:58px;height:58px;border-radius:50%;
+  display:grid;place-items:center;
+  background:radial-gradient(circle at 30% 25%,#e5c47a,#b7863e 60%,#795020);
+  color:#501020;border:2px solid #f0d18a;
+  box-shadow:0 5px 15px #17020877,inset 0 0 0 3px #7d512633;
+  transition:opacity .45s,transform .6s,filter .5s;
+}
+.seal:before{
+  content:"";position:absolute;inset:5px;
+  border:1px solid #70431c;border-radius:50%;opacity:.7
+}
+.seal span{position:relative;font-family:'Great Vibes',cursive;font-size:25px}
+
+/* Tap/open control */
+.open-btn{
+  margin-top:32px;
+  position:relative;z-index:10;
+  box-shadow:0 6px 25px #0003;
+  transition:background .3s,color .3s,transform .3s,opacity .4s
+}
+.open-btn:hover{transform:translateY(-2px)}
+.open-btn:disabled{opacity:.65;cursor:default}
+.tap-hint{
+  font:9px 'Montserrat',sans-serif;
+  letter-spacing:2px;color:#e8c982;
+  margin-top:16px;animation:hintPulse 2s infinite
+}
+@keyframes hintPulse{50%{opacity:.45}}
+@keyframes envelopeFloat{
+  0%,100%{transform:translateY(0) rotateX(0)}
+  50%{transform:translateY(-7px) rotateX(1deg)}
+}
+
+/* The actual 3D opening sequence */
+#envelope.opening .env-flap{
+  transform:rotateX(180deg);
+  z-index:1;
+}
+#envelope.opening .env-letter{
+  transform:translateY(-115px) translateZ(55px) scale(1.04);
+}
+#envelope.opening .seal{
+  opacity:0;filter:blur(8px);
+  transform:translate(-50%,-50%) scale(1.8) rotate(25deg)
+}
+#envelope.opening .env-front{
+  opacity:.2;transition:opacity .5s
+}
+#envelope.opening .envelope-shadow{
+  transform:scaleX(1.25);opacity:.35
+}
+#envelope.opening .envelope-scene{animation:none}
+#envelope.opening .tap-hint{opacity:0}
+
+/* Gold sparkle particles */
+#envelopeParticles{
+  position:absolute;inset:0;overflow:hidden;
+  pointer-events:none;z-index:9
+}
+.spark{
+  position:absolute;width:4px;height:4px;
+  background:#ffe9ad;border-radius:50%;
+  box-shadow:0 0 10px 3px #d8b36b88;
+  animation:sparkle 1.5s ease-out forwards
+}
+@keyframes sparkle{
+  0%{opacity:0;transform:translate(0,0) scale(.3)}
+  20%{opacity:1}
+  100%{opacity:0;transform:translate(var(--sx),var(--sy)) scale(0)}
+}
 
 /* Royal main invitation */
 .hero{
@@ -204,9 +373,9 @@ section{padding:80px 20px;text-align:center;position:relative}
   from{opacity:0;transform:translateY(35px) scale(.85);filter:blur(6px)}
   to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
 }
-.couple-caption{animation:rise 1.3s 1s both}
 
 /* Introduction */
+.couple-caption{animation:rise 1.3s 1s both}
 #intro{background:var(--cream);color:var(--wine)}
 #intro .heading{color:var(--wine)}
 .monogram{
@@ -280,6 +449,14 @@ footer{
   font:9px 'Montserrat',sans-serif;letter-spacing:2px;
   line-height:2;color:var(--gold)
 }
+.music-btn{
+  position:fixed;right:16px;bottom:16px;z-index:30;
+  padding:12px 15px;border:1px solid var(--gold);
+  background:#350713eF;color:var(--gold);
+  font:9px 'Montserrat',sans-serif;letter-spacing:1px;
+  border-radius:30px;backdrop-filter:blur(8px)
+}
+.music-btn:hover{background:var(--gold);color:var(--wine)}
 @media(max-width:650px){
   section{padding:70px 17px}
   .story-grid{grid-template-columns:1fr;max-width:430px}
@@ -289,9 +466,13 @@ footer{
   .gallery-grid img:last-child{grid-column:span 2;aspect-ratio:4/3}
   .count-box{width:calc(50% - 8px);max-width:130px}
   .address{font-size:18px}
+  .envelope-scene{height:220px}
 }
 @media(prefers-reduced-motion:reduce){
-  *,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+  *,*:before,*:after{
+    animation:none!important;scroll-behavior:auto!important;
+    transition:none!important
+  }
   .reveal,.person,.couple-caption{opacity:1;transform:none;filter:none}
 }
 </style>
@@ -304,21 +485,50 @@ footer{
 <div id="envelope">
   <div class="env-inner">
     <p class="env-title">A PERSONAL INVITATION</p>
-    <div class="envelope" id="envBox">
-      <div class="env-letter">
-        <div>
-          <p style="font:10px Montserrat,sans-serif;letter-spacing:2px">YOU ARE INVITED</p>
-          <p class="script" style="font-size:42px;margin:8px">S & N</p>
-          <p style="font-size:12px">WITH LOVE</p>
+
+    <div class="envelope-scene" id="envelopeScene">
+      <div class="envelope-shadow"></div>
+
+      <div class="envelope" id="envBox">
+        <div class="env-back"></div>
+
+        <div class="env-letter">
+          <div class="letter-flower">✧ ❦ ✧</div>
+          <p class="letter-label">YOU ARE INVITED</p>
+          <div class="letter-names script">
+            Simran<br>& Nitesh
+          </div>
+          <p class="letter-label">TOGETHER FOREVER</p>
+          <p class="letter-date">25 · 11 · 2026</p>
+          <div class="letter-flower" style="margin-top:9px">✧</div>
+        </div>
+
+        <div class="env-pocket"></div>
+
+        <div class="env-flap">
+          <div class="env-flap-front"></div>
+          <div class="env-flap-back"></div>
+        </div>
+
+        <div class="env-front"></div>
+
+        <div class="seal">
+          <span>S&amp;N</span>
         </div>
       </div>
-      <div class="env-flap"></div>
-      <div class="env-front"></div>
-      <div class="seal">S<span style="font-size:12px">&</span>N</div>
     </div>
-    <p class="script gold" style="font-size:34px">A beautiful beginning awaits</p>
-    <button class="btn open-btn" id="openInvite">Open Your Invitation ✦</button>
+
+    <p class="script env-subtitle" id="envSubtitle">
+      A beautiful beginning awaits
+    </p>
+
+    <button class="btn open-btn" id="openInvite" type="button">
+      Open Your Invitation ✦
+    </button>
+
+    <p class="tap-hint" id="tapHint">✧ TAP TO UNVEIL THE MAGIC ✧</p>
   </div>
+  <div id="envelopeParticles"></div>
 </div>
 
 <header class="hero" id="home">
@@ -354,10 +564,10 @@ footer{
   <div class="reveal">
     <p class="kicker">A celebration of love</p>
     <h2 class="heading">Our Forever Begins</h2>
-    <div class="monogram">S <span style="font-size:19px">&</span> N</div>
+    <div class="monogram">S <span style="font-size:19px">&amp;</span> N</div>
     <p class="copy">With the love and blessings of our families, we begin a new chapter together. It would mean the world to us to have you by our side as we celebrate a day filled with love, laughter and lifelong memories.</p>
     <div class="rule"></div>
-    <p class="script" style="font-size:40px">With love, Simran & Nitesh</p>
+    <p class="script" style="font-size:40px">With love, Simran &amp; Nitesh</p>
   </div>
 </section>
 
@@ -391,6 +601,18 @@ footer{
   </div>
 </section>
 
+<section id="gallery">
+  <div class="reveal">
+    <p class="kicker">Moments to treasure</p>
+    <h2 class="heading">Our Memories</h2>
+    <p class="copy">A little collection of love and beautiful memories.</p>
+    <div class="gallery-grid">
+      <img src="IMG-20261109-WA0000.jpg" alt="Simran and Nitesh memory one" loading="lazy">
+      <div class="placeholder" aria-label="Wedding memory decoration">✧</div>
+      <div class="placeholder" aria-label="Wedding memory decoration">❦</div>
+    </div>
+  </div>
+</section>
 
 <section id="events">
   <div class="reveal">
@@ -407,7 +629,7 @@ footer{
       <article class="event">
         <div class="symbol">❦</div>
         <p class="kicker">Celebrate together</p>
-        <h3>Family & Friends</h3>
+        <h3>Family &amp; Friends</h3>
         <p>Your love, laughter and blessings will make our celebration complete.</p>
       </article>
       <article class="event">
@@ -442,25 +664,86 @@ footer{
     <h2 class="heading">Until We Celebrate Together</h2>
     <p class="copy">Your presence and blessings are the most precious gifts we could ask for. Thank you for being part of our story.</p>
     <div class="rule"></div>
-    <p class="script" style="font-size:65px;color:#8e5b24">Simran & Nitesh</p>
+    <p class="script" style="font-size:65px;color:#8e5b24">Simran &amp; Nitesh</p>
     <p class="kicker">25 · 11 · 2026</p>
     <a class="btn" href="#home">Back to the Beginning ↑</a>
   </div>
 </section>
 
-<footer>CRAFTED WITH LOVE · SIMRAN & NITESH · 2026</footer>
+<footer>CRAFTED WITH LOVE · SIMRAN &amp; NITESH · 2026</footer>
 
-<!-- Add your MP3 at music/wedding-instrumental.mp3 -->
 <audio id="music" src="music/wedding-instrumental.mp3" loop preload="none"></audio>
 <button class="music-btn" id="musicToggle" type="button">♫ MUSIC: OFF</button>
 
 <script>
+/* ======================================
+   ENVELOPE: 3D OPENING SEQUENCE
+====================================== */
 const envelope=document.getElementById('envelope');
+const envBox=document.getElementById('envBox');
+const openButton=document.getElementById('openInvite');
+const envSubtitle=document.getElementById('envSubtitle');
+const tapHint=document.getElementById('tapHint');
+const particleLayer=document.getElementById('envelopeParticles');
 
-document.getElementById('openInvite').addEventListener('click',()=>{
-  document.getElementById('envBox').classList.add('open');
-  document.getElementById('openInvite').textContent='Opening...';
-  setTimeout(()=>envelope.classList.add('closed'),1100);
+let envelopeOpened=false;
+
+function burstSparkles(count=36){
+  const rect=envBox.getBoundingClientRect();
+  const cx=rect.left+rect.width/2;
+  const cy=rect.top+rect.height/2;
+
+  for(let i=0;i<count;i++){
+    const spark=document.createElement('span');
+    spark.className='spark';
+    spark.style.left=cx+'px';
+    spark.style.top=cy+'px';
+
+    const angle=Math.random()*Math.PI*2;
+    const distance=55+Math.random()*180;
+
+    spark.style.setProperty('--sx',Math.cos(angle)*distance+'px');
+    spark.style.setProperty('--sy',Math.sin(angle)*distance+'px');
+    spark.style.animationDelay=(Math.random()*.3)+'s';
+
+    particleLayer.appendChild(spark);
+    spark.addEventListener('animationend',()=>spark.remove());
+  }
+}
+
+function openInvitation(){
+  if(envelopeOpened)return;
+  envelopeOpened=true;
+  openButton.disabled=true;
+  openButton.textContent='Unveiling your invitation...';
+  envSubtitle.style.opacity='0';
+  tapHint.style.opacity='0';
+
+  // Wax seal disappears as the envelope flap rotates backward.
+  envelope.classList.add('opening');
+  burstSparkles(42);
+
+  // A second burst follows the card as it rises.
+  setTimeout(()=>burstSparkles(24),650);
+
+  // Reveal the original website after the 3D animation.
+  setTimeout(()=>{
+    envelope.classList.add('closed');
+    document.body.style.overflowY='auto';
+    document.getElementById('home').scrollIntoView({behavior:'auto'});
+    createPetals(20);
+  },1900);
+}
+
+openButton.addEventListener('click',openInvitation);
+
+envBox.addEventListener('click',openInvitation);
+
+document.getElementById('envelopeScene').addEventListener('keydown',e=>{
+  if(e.key==='Enter'||e.key===' '){
+    e.preventDefault();
+    openInvitation();
+  }
 });
 
 /* Countdown */
@@ -473,7 +756,6 @@ function updateCountdown(){
   document.getElementById('minutes').textContent=Math.floor(diff%3600000/60000);
   document.getElementById('seconds').textContent=Math.floor(diff%60000/1000);
 }
-
 updateCountdown();
 setInterval(updateCountdown,1000);
 
@@ -493,23 +775,25 @@ if('IntersectionObserver' in window){
   document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
 }
 
-/* Golden falling petals */
+/* Falling gold petals */
 const petals=document.getElementById('petals');
 
-function addPetal(){
-  const p=document.createElement('span');
-  p.className='petal';
-  p.textContent=['✦','❋','✧','❦'][Math.floor(Math.random()*4)];
-  p.style.left=Math.random()*100+'vw';
-  p.style.fontSize=(10+Math.random()*16)+'px';
-  p.style.animationDuration=(8+Math.random()*8)+'s';
-  petals.appendChild(p);
-  setTimeout(()=>p.remove(),17000);
+function createPetals(count=1){
+  for(let i=0;i<count;i++){
+    const p=document.createElement('span');
+    p.className='petal';
+    p.textContent=['✦','❋','✧','❦'][Math.floor(Math.random()*4)];
+    p.style.left=Math.random()*100+'vw';
+    p.style.fontSize=(10+Math.random()*16)+'px';
+    p.style.animationDuration=(8+Math.random()*8)+'s';
+    p.style.setProperty('--drift',(Math.random()*160-80)+'px');
+    petals.appendChild(p);
+    p.addEventListener('animationend',()=>p.remove());
+  }
 }
+setInterval(()=>createPetals(1),900);
 
-setInterval(addPetal,900);
-
-/* Optional music */
+/* Optional music: requires your own MP3 file */
 const music=document.getElementById('music');
 const musicToggle=document.getElementById('musicToggle');
 
