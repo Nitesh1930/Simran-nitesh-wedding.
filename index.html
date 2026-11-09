@@ -10,255 +10,264 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Great+Vibes&family=Montserrat:wght@300;400&display=swap');
 
-:root {
-  --wine:#350713;
-  --wine2:#64192e;
-  --gold:#d8b36b;
-  --pale:#f7e4b8;
-  --cream:#fff5e6;
+:root{
+--wine:#350713;
+--wine2:#64192e;
+--gold:#d8b36b;
+--pale:#f7e4b8;
+--cream:#fff5e6;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;background:var(--wine);color:var(--cream);
-  font-family:'Cormorant Garamond',serif;overflow-x:hidden
+margin:0;background:var(--wine);color:var(--cream);
+font-family:'Cormorant Garamond',serif;overflow-x:hidden
 }
 a{color:inherit}
 button{font:inherit;cursor:pointer}
 .script{font-family:'Great Vibes',cursive}
 .gold{color:var(--gold)}
 .kicker{
-  font:10px 'Montserrat',sans-serif;letter-spacing:3px;
-  text-transform:uppercase;color:var(--gold)
+font:10px 'Montserrat',sans-serif;letter-spacing:3px;
+text-transform:uppercase;color:var(--gold)
 }
 .btn{
-  display:inline-block;padding:14px 22px;
-  border:1px solid var(--gold);background:var(--gold);
-  color:var(--wine);text-decoration:none;
-  font:10px 'Montserrat',sans-serif;letter-spacing:1.5px;
-  text-transform:uppercase;transition:.3s
+display:inline-block;padding:14px 22px;
+border:1px solid var(--gold);background:var(--gold);
+color:var(--wine);text-decoration:none;
+font:10px 'Montserrat',sans-serif;letter-spacing:1.5px;
+text-transform:uppercase;transition:.3s
 }
 .btn:hover{background:transparent;color:var(--gold)}
 section{padding:80px 20px;text-align:center;position:relative}
 .heading{
-  font-size:clamp(38px,8vw,62px);font-weight:300;
-  line-height:1.1;margin:16px 0 25px
+font-size:clamp(38px,8vw,62px);font-weight:300;
+line-height:1.1;margin:16px 0 25px
 }
 .copy{max-width:620px;margin:auto;font-size:19px;line-height:1.8}
 .rule{height:1px;width:90px;background:var(--gold);margin:25px auto}
 
+/* Falling gold decorations */
 #petals{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:15}
 .petal{
-  position:absolute;top:-30px;color:var(--gold);
-  animation:fall linear forwards;opacity:.8
+position:absolute;top:-30px;color:var(--gold);
+animation:fall linear forwards;opacity:.8
 }
 @keyframes fall{
-  to{transform:translateY(110vh) rotate(600deg);opacity:0}
+to{transform:translateY(110vh) rotate(600deg);opacity:0}
 }
 @keyframes glow{
-  from{text-shadow:0 0 4px #d8b36b44}
-  to{text-shadow:0 0 20px #f7e4b8}
+from{text-shadow:0 0 4px #d8b36b44}
+to{text-shadow:0 0 20px #f7e4b8}
 }
 @keyframes rise{
-  from{opacity:0;transform:translateY(25px)}
-  to{opacity:1;transform:translateY(0)}
+from{opacity:0;transform:translateY(25px)}
+to{opacity:1;transform:translateY(0)}
 }
 
+/* Opening envelope */
 #envelope{
-  position:fixed;inset:0;z-index:100;
-  background:radial-gradient(ellipse,#6c2036,#25030c);
-  display:grid;place-items:center;padding:24px;
-  transition:opacity 1s,visibility 1s
+position:fixed;inset:0;z-index:100;
+background:radial-gradient(ellipse,#6c2036,#25030c);
+display:grid;place-items:center;padding:24px;
+transition:opacity 1s,visibility 1s
 }
 #envelope.closed{opacity:0;visibility:hidden;pointer-events:none}
 .env-inner{width:min(100%,410px);text-align:center}
 .env-title{
-  font:10px 'Montserrat',sans-serif;letter-spacing:4px;
-  color:var(--gold);margin-bottom:25px
+font:10px 'Montserrat',sans-serif;letter-spacing:4px;
+color:var(--gold);margin-bottom:25px
 }
 .envelope{
-  height:245px;position:relative;perspective:1000px;
-  background:#681c30;border:1px solid var(--gold);
-  box-shadow:0 20px 60px #0007
+height:245px;position:relative;perspective:1000px;
+background:#681c30;border:1px solid var(--gold);
+box-shadow:0 20px 60px #0007
 }
 .env-letter{
-  position:absolute;top:5%;left:8%;width:84%;height:90%;
-  background:linear-gradient(140deg,#fff4dd,#e5c990);
-  color:var(--wine);display:grid;place-items:center;
-  transition:transform 1s .3s;z-index:1
+position:absolute;top:5%;left:8%;width:84%;height:90%;
+background:linear-gradient(140deg,#fff4dd,#e5c990);
+color:var(--wine);display:grid;place-items:center;
+transition:transform 1s .3s;z-index:1
 }
 .env-flap{
-  position:absolute;inset:0;
-  background:linear-gradient(140deg,#a74a60,#6a1b30);
-  clip-path:polygon(0 0,100% 0,50% 65%);
-  transform-origin:top;transition:transform 1s;z-index:3
+position:absolute;inset:0;
+background:linear-gradient(140deg,#a74a60,#6a1b30);
+clip-path:polygon(0 0,100% 0,50% 65%);
+transform-origin:top;transition:transform 1s;z-index:3
 }
 .env-front{
-  position:absolute;inset:0;z-index:2;
-  background:linear-gradient(32deg,transparent 49.5%,#9d4a59 50%,transparent 50.5%),
-  linear-gradient(-32deg,transparent 49.5%,#6a1a2d 50%,transparent 50.5%);
-  pointer-events:none
+position:absolute;inset:0;z-index:2;
+background:linear-gradient(32deg,transparent 49.5%,#9d4a59 50%,transparent 50.5%),
+linear-gradient(-32deg,transparent 49.5%,#6a1a2d 50%,transparent 50.5%);
+pointer-events:none
 }
 .seal{
-  position:absolute;z-index:4;left:50%;top:55%;
-  transform:translate(-50%,-50%);
-  width:54px;height:54px;border-radius:50%;
-  display:grid;place-items:center;background:var(--gold);
-  color:var(--wine);border:2px solid #8e632a;transition:.3s
+position:absolute;z-index:4;left:50%;top:55%;
+transform:translate(-50%,-50%);
+width:54px;height:54px;border-radius:50%;
+display:grid;place-items:center;background:var(--gold);
+color:var(--wine);border:2px solid #8e632a;transition:.3s
 }
 #envelope.open .env-flap{transform:rotateX(180deg)}
 #envelope.open .env-letter{transform:translateY(-90px) scale(1.03)}
 #envelope.open .seal{opacity:0}
 .open-btn{margin-top:32px}
 
+/* Royal main invitation */
 .hero{
-  min-height:100svh;display:flex;align-items:center;
-  justify-content:center;padding:45px 18px;
-  background:radial-gradient(ellipse at 50% 35%,#7c2a40,#4a0d20 50%,#20030a);
-  overflow:hidden
+min-height:100svh;display:flex;align-items:center;
+justify-content:center;padding:45px 18px;
+background:radial-gradient(ellipse at 50% 35%,#7c2a40,#4a0d20 50%,#20030a);
+overflow:hidden
 }
 .hero-frame{
-  width:min(100%,620px);padding:45px 18px 35px;
-  border:1px solid var(--gold);outline:1px solid #96713b;
-  outline-offset:7px;text-align:center;position:relative
+width:min(100%,620px);padding:45px 18px 35px;
+border:1px solid var(--gold);outline:1px solid #96713b;
+outline-offset:7px;text-align:center;position:relative
 }
 .hero-frame:before,.hero-frame:after{
-  position:absolute;color:var(--gold);font-size:22px;content:"✧"
+position:absolute;color:var(--gold);font-size:22px;content:"✧"
 }
 .hero-frame:before{top:10px;left:12px}
 .hero-frame:after{bottom:10px;right:12px}
 .hero h1{
-  font-size:clamp(65px,14vw,100px);font-weight:400;
-  line-height:.85;color:var(--pale);margin:28px 0
+font-size:clamp(65px,14vw,100px);font-weight:400;
+line-height:.85;color:var(--pale);margin:28px 0
 }
 .hero h1 span{
-  display:block;font-family:'Great Vibes',cursive;
-  font-size:.5em;line-height:1.3;color:var(--cream)
+display:block;font-family:'Great Vibes',cursive;
+font-size:.5em;line-height:1.3;color:var(--cream)
 }
 .hero-date{font-size:24px;color:var(--pale);letter-spacing:2px}
 .hero-ornament{
-  color:var(--gold);font-size:23px;letter-spacing:8px;
-  animation:glow 2.5s ease-in-out infinite alternate
+color:var(--gold);font-size:23px;letter-spacing:8px;
+animation:glow 2.5s ease-in-out infinite alternate
 }
 .hero-sub{
-  font:10px 'Montserrat',sans-serif;
-  letter-spacing:3px;text-transform:uppercase
+font:10px 'Montserrat',sans-serif;
+letter-spacing:3px;text-transform:uppercase
 }
 .hero .btn{margin-top:15px}
 
+/* Stylized animated bride and groom */
 .couple-stage{
-  position:relative;width:min(100%,440px);height:260px;
-  margin:25px auto 5px;display:flex;align-items:flex-end;
-  justify-content:center;overflow:hidden
+position:relative;width:min(100%,440px);height:260px;
+margin:25px auto 5px;display:flex;align-items:flex-end;
+justify-content:center;overflow:hidden
 }
 .couple-stage:before{
-  content:"";position:absolute;bottom:0;width:220px;height:220px;
-  border:1px solid var(--gold);border-radius:50% 50% 0 0;
-  border-bottom:0;background:radial-gradient(ellipse,#d8b36b25,transparent 70%)
+content:"";position:absolute;bottom:0;width:220px;height:220px;
+border:1px solid var(--gold);border-radius:50% 50% 0 0;
+border-bottom:0;background:radial-gradient(ellipse,#d8b36b25,transparent 70%)
 }
 .couple-stage:after{
-  content:"✦ ❋ ✧ ❦ ✧ ❋ ✦";position:absolute;top:15px;
-  color:var(--gold);letter-spacing:6px;animation:glow 2s infinite alternate
+content:"✦ ❋ ✧ ❦ ✧ ❋ ✦";position:absolute;top:15px;
+color:var(--gold);letter-spacing:6px;animation:glow 2s infinite alternate
 }
 .person{
-  position:relative;width:145px;height:215px;opacity:0;
-  animation:coupleIn 1.5s ease-out forwards
+position:relative;width:145px;height:215px;opacity:0;
+animation:coupleIn 1.5s ease-out forwards
 }
 .person.bride{z-index:2;margin-right:-15px}
 .person.groom{margin-left:-15px;animation-delay:.5s}
 .head{
-  position:absolute;top:22px;left:52px;width:43px;height:47px;
-  border-radius:48%;background:linear-gradient(90deg,#8b5038,#d7a17c,#895039)
+position:absolute;top:22px;left:52px;width:43px;height:47px;
+border-radius:48%;background:linear-gradient(90deg,#8b5038,#d7a17c,#895039)
 }
 .hair{
-  position:absolute;top:12px;left:47px;width:53px;height:49px;
-  border-radius:50% 50% 20% 20%;background:#211018
+position:absolute;top:12px;left:47px;width:53px;height:49px;
+border-radius:50% 50% 20% 20%;background:#211018
 }
 .bride .hair{height:55px}
 .person-body{
-  position:absolute;top:63px;left:18px;width:108px;height:152px;
-  clip-path:polygon(35% 0,65% 0,80% 25%,100% 100%,0 100%,20% 25%)
+position:absolute;top:63px;left:18px;width:108px;height:152px;
+clip-path:polygon(35% 0,65% 0,80% 25%,100% 100%,0 100%,20% 25%)
 }
 .bride .person-body{background:linear-gradient(90deg,#410817,#8e263e,#500b20)}
 .groom .person-body{
-  background:linear-gradient(90deg,#21040b,#591629,#26040c);
-  clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)
+background:linear-gradient(90deg,#21040b,#591629,#26040c);
+clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)
 }
 .bride .person-body:after{
-  content:"✦ ✧ ✦";position:absolute;top:30px;left:17px;
-  color:var(--gold);line-height:2.2
+content:"✦ ✧ ✦";position:absolute;top:30px;left:17px;
+color:var(--gold);line-height:2.2
 }
 .groom .person-body:after{
-  content:"";position:absolute;top:0;left:49%;
-  width:2px;height:100%;background:var(--gold)
+content:"";position:absolute;top:0;left:49%;
+width:2px;height:100%;background:var(--gold)
 }
 .bride .head:after{
-  content:"✦";position:absolute;top:-15px;left:11px;
-  color:var(--gold);font-size:17px
+content:"✦";position:absolute;top:-15px;left:11px;
+color:var(--gold);font-size:17px
 }
 @keyframes coupleIn{
-  from{opacity:0;transform:translateY(35px) scale(.85);filter:blur(6px)}
-  to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+from{opacity:0;transform:translateY(35px) scale(.85);filter:blur(6px)}
+to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
 }
 .couple-caption{animation:rise 1.3s 1s both}
 
+/* Introduction */
 #intro{background:var(--cream);color:var(--wine)}
 #intro .heading{color:var(--wine)}
 .monogram{
-  width:105px;height:105px;border:1px solid #b58a45;
-  border-radius:50%;outline:1px solid #d8bd84;outline-offset:5px;
-  margin:25px auto;display:grid;place-items:center;
-  font-size:34px;color:#9b6c2c
+width:105px;height:105px;border:1px solid #b58a45;
+border-radius:50%;outline:1px solid #d8bd84;outline-offset:5px;
+margin:25px auto;display:grid;place-items:center;
+font-size:34px;color:#9b6c2c
 }
 
+/* Live countdown */
 #countdown{background:linear-gradient(145deg,#4b1022,#23040b)}
 .count-grid{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:30px auto}
 .count-box{width:100px;border:1px solid #9e783f;padding:16px 8px}
 .count-box strong{display:block;font-size:40px;font-weight:300;color:var(--pale)}
 .count-box span{font:9px 'Montserrat',sans-serif;letter-spacing:2px;color:var(--gold)}
 
+/* Story and photos */
 #story{background:#f5ead9;color:var(--wine)}
 #story .heading{color:var(--wine)}
 .story-grid{
-  display:grid;grid-template-columns:1fr 1fr;align-items:center;
-  gap:25px;max-width:900px;margin:35px auto 0;text-align:left
+display:grid;grid-template-columns:1fr 1fr;align-items:center;
+gap:25px;max-width:900px;margin:35px auto 0;text-align:left
 }
 .story-photo{
-  display:block;width:100%;aspect-ratio:4/5;object-fit:cover;
-  border:6px solid white;outline:1px solid #c6a36a;outline-offset:-12px
+display:block;width:100%;aspect-ratio:4/5;object-fit:cover;
+border:6px solid white;outline:1px solid #c6a36a;outline-offset:-12px
 }
 .story-text h3{font-size:36px;font-weight:400;margin:15px 0}
 .story-text p{font-size:18px;line-height:1.8}
 #gallery{background:#300610}
 .gallery-grid{
-  max-width:950px;margin:35px auto 0;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:12px
+max-width:950px;margin:35px auto 0;
+display:grid;grid-template-columns:repeat(3,1fr);gap:12px
 }
 .gallery-grid img{
-  display:block;width:100%;aspect-ratio:3/4;object-fit:cover;
-  border:1px solid #98713a;transition:transform .4s
+display:block;width:100%;aspect-ratio:3/4;object-fit:cover;
+border:1px solid #98713a;transition:transform .4s
 }
 .gallery-grid img:hover{transform:scale(1.025)}
 .placeholder{
-  aspect-ratio:3/4;background:linear-gradient(140deg,#702b40,#29050e);
-  display:grid;place-items:center;color:var(--gold);
-  font-size:40px;border:1px solid #98713a
+aspect-ratio:3/4;background:linear-gradient(140deg,#702b40,#29050e);
+display:grid;place-items:center;color:var(--gold);
+font-size:40px;border:1px solid #98713a
 }
 
+/* Events */
 #events{background:var(--cream);color:var(--wine)}
 #events .heading{color:var(--wine)}
 .event-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:16px;max-width:950px;margin:35px auto 0
+display:grid;grid-template-columns:repeat(3,1fr);
+gap:16px;max-width:950px;margin:35px auto 0
 }
 .event{
-  border:1px solid #c3a165;padding:28px 15px;
-  background:linear-gradient(145deg,#fffaf2,#f0dfc5)
+border:1px solid #c3a165;padding:28px 15px;
+background:linear-gradient(145deg,#fffaf2,#f0dfc5)
 }
 .event .symbol{font-size:32px;color:#9a6b2e}
 .event h3{font-size:27px;font-weight:400;margin:13px 0}
 .event p{font-size:17px;line-height:1.7}
 
+/* Venue and closing */
 #venue{background:radial-gradient(ellipse at center,#6b2035,#28040d)}
 .address{font-size:21px;line-height:1.8}
 #closing{background:var(--cream);color:var(--wine)}
@@ -267,34 +276,34 @@ section{padding:80px 20px;text-align:center;position:relative}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s,transform .8s}
 .reveal.visible{opacity:1;transform:translateY(0)}
 footer{
-  text-align:center;padding:30px 15px;
-  font:9px 'Montserrat',sans-serif;letter-spacing:2px;
-  line-height:2;color:var(--gold)
+text-align:center;padding:30px 15px;
+font:9px 'Montserrat',sans-serif;letter-spacing:2px;
+line-height:2;color:var(--gold)
 }
 .music-btn{
-  position:fixed;right:16px;bottom:16px;z-index:50;
-  padding:12px 16px;border:1px solid var(--gold);
-  background:var(--wine);color:var(--gold);
-  font:10px 'Montserrat',sans-serif;letter-spacing:1px
+position:fixed;right:16px;bottom:16px;z-index:50;
+padding:12px 16px;border:1px solid var(--gold);
+background:var(--wine);color:var(--gold);
+font:10px 'Montserrat',sans-serif;letter-spacing:1px
 }
 @media(max-width:650px){
-  section{padding:70px 17px}
-  .story-grid{grid-template-columns:1fr;max-width:430px}
-  .story-photo{max-height:440px}
-  .event-grid{grid-template-columns:1fr;max-width:430px}
-  .gallery-grid{grid-template-columns:repeat(2,1fr);gap:8px}
-  .gallery-grid img:last-child{grid-column:span 2;aspect-ratio:4/3}
-  .count-box{width:calc(50% - 8px);max-width:130px}
-  .address{font-size:18px}
+section{padding:70px 17px}
+.story-grid{grid-template-columns:1fr;max-width:430px}
+.story-photo{max-height:440px}
+.event-grid{grid-template-columns:1fr;max-width:430px}
+.gallery-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+.gallery-grid img:last-child{grid-column:span 2;aspect-ratio:4/3}
+.count-box{width:calc(50% - 8px);max-width:130px}
+.address{font-size:18px}
 }
 @media(prefers-reduced-motion:reduce){
-  *,:before,:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
-  .reveal,.person,.couple-caption{opacity:1;transform:none;filter:none}
+*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+.reveal,.person,.couple-caption{opacity:1;transform:none;filter:none}
 }
 </style>
 </head>
-
 <body>
+
 <div id="petals"></div>
 
 <!-- ENVELOPE OPENING -->
@@ -522,5 +531,6 @@ musicToggle.addEventListener('click',async()=>{
   }
 });
 </script>
+
 </body>
 </html>
